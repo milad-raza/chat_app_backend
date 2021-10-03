@@ -46,7 +46,7 @@ router.post('/:id', auth, async (req, res) => {
     res.status(200).send(_.pick(user, ["_id", "name", "email"]))
 })
 
-// get own profile only
+// get your own profile only
 
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select("-password")
