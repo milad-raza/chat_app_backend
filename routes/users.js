@@ -29,21 +29,19 @@ router.post('/', async (req, res) => {
 })
 
 // update user
-router.post('/:id', auth, async (req, res) => {
+router.post('/me', auth, async (req, res) => {
 
     const error = validateUpdateUser(req.body);
     if (error.error) return res.status(400).send(error.error.details[0].message);
 
-    let user = await User.findById(req.params.id)
-    if (!user) return res.status(400).send("User not found.");
+    const user = await User.findById(req.user._id)
 
-    if (user !== req.user._id) return res.status(400).send("Your are allowed to update your profile only.");
-
-    user.name = req.body.name;
-    user.email = req.body.email;
-
+        user.name = req.body.name;
+        user.email = req.body.email;
+    
     await user.save();
     res.status(200).send(_.pick(user, ["_id", "name", "email"]))
+
 })
 
 // get own profile only
@@ -75,6 +73,8 @@ router.post("/forgot-password", async (req, res) => {
     //     }).save();
     // }
 
+    res.send("Available Soon")
+
     // const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
     // await sendEmail(user.email, "Password reset", link);
 
@@ -83,8 +83,8 @@ router.post("/forgot-password", async (req, res) => {
 
 function validateUpdateUser(req) {
     const schema = Joi.object({
-        name: Joi.string().min(5).max(50).required,
-        email: Joi.string().min(5).max(50).email().required,
+        name: Joi.string().min(5).max(50).required(),
+        email: Joi.string().min(5).max(50).email().required(),
     })
     return schema.validate(req)
 }
