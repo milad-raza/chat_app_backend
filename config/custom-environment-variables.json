@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "chatApp_jwtPrivateKey"
+    "jwtPrivateKey": "chatApp_jwtPrivateKey",
+    "dbUrl" : "chatApp_dbUrl"
 }

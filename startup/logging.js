@@ -1,4 +1,5 @@
 const winston = require('winston');
+const config = require("config")
 require('winston-mongodb');
 require('express-async-errors')
 
@@ -26,6 +27,6 @@ module.exports = function () {
     })
 
     winston.configure({ transports: [new winston.transports.File({ filename: './logfile.log' })] });
-    winston.configure({ transports: [new winston.transports.MongoDB({ db: 'mongodb://localhost/chat-app', options: { useUnifiedTopology: true } })] });
+    winston.configure({ transports: [new winston.transports.MongoDB({ db: config.get("dbUrl"), options: { useUnifiedTopology: true } })] });
 
 }
