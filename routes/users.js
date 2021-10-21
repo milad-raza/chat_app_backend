@@ -85,8 +85,6 @@ router.post("/forgot-password", async (req, res) => {
         }).save();
     }
 
-    console.log(token)
-
     const link = `${config.get("baseUrl")}/reset-password/${user._id}?token=${token.token}`;
 
     const htmlTemplate = resetPasswordEmail(link)
@@ -117,7 +115,9 @@ router.post("/reset-password/:id/:token", async (req, res) => {
     });
     if (!token) return res.status(400).send({message: "Invalid Or Expired Link."});
 
-    user.password = req.body.password;
+    const salt = await bcrypt.genSalt(10)
+    user.password = await bcrypt.hash(req.body.password, salt)
+
     await user.save();
     await token.delete();
 
