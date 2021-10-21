@@ -1,4 +1,10 @@
 {
     "jwtPrivateKey": "chatApp_jwtPrivateKey",
-    "dbUrl" : "chatApp_dbUrl"
+    "dbUrl" : "chatApp_dbUrl",
+    "email": "chatApp_email",
+    "emailPassword": "chatApp_emailPassword",
+    "emailHost" : "chatApp_emailHost",
+    "baseUrl" : "chatApp_baseUrl",
+    "planTextPassword" : "chatApp_planTextPassword",
+    "emailService": "chatApp_emailService"
 }

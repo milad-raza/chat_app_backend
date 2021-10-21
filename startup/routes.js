@@ -21,7 +21,8 @@ module.exports = function (app) {
     }
     app.use(express.json())
     app.use(helmet())
-    app.use(cors(corsOptions))
+    // app.use(cors(corsOptions))
+    app.use(cors())
     app.use('/api/users', users)
     app.use('/api/conversations', conversations)
     app.use('/api/messages', messages)

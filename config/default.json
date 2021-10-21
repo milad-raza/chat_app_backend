@@ -1,4 +1,10 @@
 {
     "jwtPrivateKey": "",
-    "dbUrl" : "mongodb://localhost/chat-app"
+    "dbUrl" : "mongodb://localhost/chat-app",
+    "email": "",
+    "emailPassword": "",
+    "emailHost" : "smtp.gmail.com",
+    "baseUrl" : "",
+    "planTextPassword" : "",
+    "emailService": "Gmail"
 }

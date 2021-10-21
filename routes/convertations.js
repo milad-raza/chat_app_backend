@@ -12,7 +12,7 @@ router.post('/:id', auth, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).send("Invalid User ID.");
 
     let user = await User.findById(req.params.id)
-    if (!user) return res.status(400).send("User not found with ID.");
+    if (!user) return res.status(400).send({message: "User not found with ID."});
 
     const conversation = new Conversation({
         members: [
