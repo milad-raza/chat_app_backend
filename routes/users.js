@@ -121,7 +121,7 @@ router.post("/reset-password/:id/:token", async (req, res) => {
     await user.save();
     await token.delete();
 
-    res.status(200).send({message: "Password Reset Sucessfully."});
+    res.status(200).send({message: "Password Reset Sucessfully.", data: user});
 });
 
 function validateUpdateUser(req) {
