@@ -101,7 +101,7 @@ router.post("/forgot-password", async (req, res) => {
 // reset password
 
 router.post("/reset-password/:id/:token", async (req, res) => {
-    const error = validateResetPassword(req.body);
+    const error = validateResetPassword(_.pick(req.body, ["password"]));
     if (error.error) return res.status(400).send({ message: error.error.details[0].message });
 
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) return res.status(400).send({ message: "Invalid User ID." });
