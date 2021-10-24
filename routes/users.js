@@ -53,7 +53,7 @@ router.post('/me', auth, async (req, res) => {
 
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select("-password")
-    res.send(user)
+    res.status(200).send(user)
 })
 
 // delete user
@@ -91,10 +91,10 @@ router.post("/forgot-password", async (req, res) => {
 
     const sendMail = await sendEmail(user.email, "Reset Password", htmlTemplate)
     if (sendMail.sended) {
-        res.send({ message: "Password Reset Link Sent To Your Email Account." });
+        res.status(200).send({ message: "Password Reset Link Sent To Your Email Account." });
     }
     else if (sendMail.error) {
-        res.send({ message: "Error Occured While Sending Reset Password Link To Email." });
+        res.status(400).send({ message: "Error Occured While Sending Reset Password Link To Email." });
     }
 })
 
@@ -121,7 +121,7 @@ router.post("/reset-password/:id/:token", async (req, res) => {
     await user.save();
     await token.delete();
 
-    res.send({message: "Password Reset Sucessfully."});
+    res.status(200).send({message: "Password Reset Sucessfully."});
 });
 
 function validateUpdateUser(req) {
